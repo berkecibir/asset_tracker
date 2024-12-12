@@ -18,8 +18,10 @@ class _SplashPageState extends State<SplashPage> {
     redirectToLogin();
   }
 
+  Duration splashDurationValue() => const Duration(seconds: 2);
+
   Future<void> redirectToLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(splashDurationValue());
     Navigation.pushReplace(page: const LoginPage());
   }
 
