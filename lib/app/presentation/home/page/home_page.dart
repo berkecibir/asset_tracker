@@ -1,7 +1,8 @@
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  static String id = 'Home';
+  static String id = AppTexts.homePageId;
   const HomePage({super.key});
 
   @override

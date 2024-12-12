@@ -11,7 +11,7 @@ import '../../widgets/auth/auth_text_form_field.dart';
 import '../../widgets/custom_button.dart';
 
 class LoginPage extends StatefulWidget {
-  static String id = 'Login';
+  static String id = AppTexts.loginPageId;
 
   const LoginPage({super.key});
 
