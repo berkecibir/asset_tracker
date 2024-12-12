@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/sizes/app_border_radius.dart';
 import 'package:asset_tracker/app/core/widgets/device_size/device_size.dart';
 import 'package:flutter/material.dart';
 import '../../core/utils/constants/app_text_style.dart';
@@ -18,8 +19,8 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.teal,
         fixedSize: Size(DeviceSize.width! * 0.886, 60),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AppBorderRadius.small,
         ),
       ),
       onPressed: onPressed,

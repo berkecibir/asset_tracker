@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/sizes/app_border_radius.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -12,18 +13,14 @@ class AppTheme {
         borderSide: BorderSide(
           color: Colors.black,
         ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
+        borderRadius: AppBorderRadius.small,
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.black,
           width: 1.5,
         ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
-        ),
+        borderRadius: AppBorderRadius.small,
       ),
     ),
   );
