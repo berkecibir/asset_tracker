@@ -11,4 +11,5 @@ class AppTexts {
   static const splashPageId = 'Splash';
   static const loginPageId = 'Login';
   static const homePageId = 'Home';
+  static const authRegExp = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
 }

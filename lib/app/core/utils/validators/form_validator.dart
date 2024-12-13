@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/utils/constants/app_regex.dart';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 
 class FormValidator {
@@ -12,8 +13,7 @@ class FormValidator {
       return AppTexts.validateEmailMessage;
     }
     // regex kontrolü
-    const emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-    final regex = RegExp(emailPattern);
+    final regex = RegExp(AppRegex.emailPattern);
     return regex.hasMatch(email) ? null : AppTexts.validateRegexcontrollMessage;
   }
 
