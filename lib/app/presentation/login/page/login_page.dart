@@ -64,17 +64,12 @@ class _LoginPageState extends State<LoginPage> {
                 DeviceSpacing.large.height,
                 LogInButton(
                   onPressed: () {
-                    // form işlemi sonrası
                     if (key.currentState?.validate() ?? false) {
-                      if (kDebugMode) {
-                        print('Form tamam');
-                        Navigation.pushReplace(page: const HomePage());
-                        // form işlemi tamamlanmazsa debugda yazar
-                      } else {
-                        if (kDebugMode) {
-                          print('Form olmadı');
-                        }
-                      }
+                      debugPrint('Form İşlemleri tamamdır');
+                      Navigation.pushReplace(page: const HomePage());
+                      // form işlemi tamamlanmazsa debugda yazar
+                    } else {
+                      debugPrint('Form İşlemleri tamamlanamadı');
                     }
                   },
                   text: AppTexts.loginButtonTitle,
