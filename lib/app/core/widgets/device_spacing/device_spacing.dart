@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../sizes/app_sizes.dart';
+
 final class SpacingType {
   SpacingType._();
 }
@@ -7,19 +9,19 @@ final class SpacingType {
 /// Proje için global SizedBox sınıfı
 enum DeviceSpacing {
   /// Bu değer 5
-  xsmall(5),
+  xsmall(AppSizes.xSmall),
 
   /// Bu değer 10
-  small(10),
+  small(AppSizes.small),
 
   /// Bu değer 15
-  medium(15),
+  medium(AppSizes.medium),
 
   /// Bu değer 20
-  large(20),
+  large(AppSizes.large),
 
   /// Bu değer 30
-  xlarge(30);
+  xlarge(AppSizes.xLarge);
 
   final double value;
   const DeviceSpacing(this.value);
