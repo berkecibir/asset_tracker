@@ -18,12 +18,12 @@ class FormValidator {
   }
 
   // Şifre doğrulayıcı
-  static String? validatePassword(String? password) {
+  static String? validatePassword(String? password, {int minLength = 6}) {
     if (password == null || password.isEmpty) {
       return AppTexts.validatePasswordMessage;
     }
-    if (password.length < 6) {
-      return AppTexts.validatePasswordLengthMessage;
+    if (password.length < minLength) {
+      return AppTexts.validatePasswordLengthMessage(minLength);
     }
     return null;
   }
