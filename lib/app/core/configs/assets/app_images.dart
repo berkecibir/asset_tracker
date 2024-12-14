@@ -1,5 +1,5 @@
 class AppImages {
-  static const String basePath = 'assets/images/';
-  static const jpegFormat = '.jpeg';
-  static const logo = '${basePath}logo_asset_tracker$jpegFormat';
+  static const String _basePath = 'assets/images/';
+  static const _jpegFormat = '.jpeg';
+  static const logo = '${_basePath}logo_asset_tracker$_jpegFormat';
 }

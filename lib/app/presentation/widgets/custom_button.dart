@@ -1,29 +1,39 @@
-import 'package:asset_tracker/app/core/widgets/device_size/device_size.dart';
 import 'package:flutter/material.dart';
+import 'package:asset_tracker/app/core/sizes/app_border_radius.dart';
+import 'package:asset_tracker/app/core/widgets/device_size/device_size.dart';
 import '../../core/utils/constants/app_text_style.dart';
 
 class CustomButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String text;
+  final VoidCallback onTap;
+  final String title;
+
+  final double _buttonheight = 60;
+  final double _buttonWidth = 0.886;
 
   const CustomButton({
     super.key,
-    required this.onPressed,
-    required this.text,
+    required this.onTap,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.teal,
-        fixedSize: Size(DeviceSize.width! * 0.886, 60),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: AppBorderRadius.small,
+      child: Container(
+        width: DeviceSize.width! * _buttonWidth,
+        height: _buttonheight,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          color: Colors.red,
+          borderRadius: AppBorderRadius.small,
+        ),
+        child: Text(
+          title,
+          style: kButtonTextStyle,
         ),
       ),
-      onPressed: onPressed,
-      child: Text(text, style: kButtonTextStyle),
     );
   }
 }

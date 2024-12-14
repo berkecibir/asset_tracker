@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/sizes/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 final class PaddingType {
@@ -7,19 +8,19 @@ final class PaddingType {
 ///Project's global padding class
 enum DevicePadding {
   ///This value is 5
-  xsmall(5),
+  xsmall(AppSizes.xSmall),
 
   ///This value is 10
-  small(10),
+  small(AppSizes.small),
 
   ///This value is 15
-  medium(15),
+  medium(AppSizes.medium),
 
   ///This value is 20
-  large(20),
+  large(AppSizes.large),
 
   ///This value is 30
-  xlarge(30);
+  xlarge(AppSizes.xLarge);
 
   final double value;
   const DevicePadding(this.value);

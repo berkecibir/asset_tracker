@@ -1,10 +1,11 @@
 import 'package:asset_tracker/app/core/configs/assets/app_images.dart';
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/core/widgets/navigation_helper/navigation_helper.dart';
 import 'package:asset_tracker/app/presentation/login/page/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
-  static String id = 'Splash';
+  static String id = AppTexts.splashPageId;
   const SplashPage({super.key});
 
   @override
@@ -18,8 +19,10 @@ class _SplashPageState extends State<SplashPage> {
     redirectToLogin();
   }
 
+  Duration splashDurationValue() => const Duration(seconds: 2);
+
   Future<void> redirectToLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(splashDurationValue());
     Navigation.pushReplace(page: const LoginPage());
   }
 

@@ -8,10 +8,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/auth/auth_greet_text.dart';
 import '../../widgets/auth/auth_text_form_field.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/login_button.dart';
 
 class LoginPage extends StatefulWidget {
-  static String id = 'Login';
+  static String id = AppTexts.loginPageId;
 
   const LoginPage({super.key});
 
@@ -62,19 +62,14 @@ class _LoginPageState extends State<LoginPage> {
                   validator: FormValidator.validatePassword,
                 ),
                 DeviceSpacing.large.height,
-                CustomButton(
+                LogInButton(
                   onPressed: () {
-                    // form işlemi sonrası
                     if (key.currentState?.validate() ?? false) {
-                      if (kDebugMode) {
-                        print('Form tamam');
-                        Navigation.pushReplace(page: const HomePage());
-                        // form işlemi tamamlanmazsa debugda yazar
-                      } else {
-                        if (kDebugMode) {
-                          print('Form olmadı');
-                        }
-                      }
+                      debugPrint('Form İşlemleri tamamdır');
+                      Navigation.pushReplace(page: const HomePage());
+                      // form işlemi tamamlanmazsa debugda yazar
+                    } else {
+                      debugPrint('Form İşlemleri tamamlanamadı');
                     }
                   },
                   text: AppTexts.loginButtonTitle,
