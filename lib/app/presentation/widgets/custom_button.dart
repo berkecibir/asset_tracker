@@ -7,6 +7,9 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
 
+  final double _buttonheight = 60;
+  final double _buttonWidth = 0.886;
+
   const CustomButton({
     super.key,
     required this.onTap,
@@ -19,8 +22,8 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: AppBorderRadius.small,
       child: Container(
-        width: DeviceSize.width! * 0.886,
-        height: 60,
+        width: DeviceSize.width! * _buttonWidth,
+        height: _buttonheight,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: Colors.red,
