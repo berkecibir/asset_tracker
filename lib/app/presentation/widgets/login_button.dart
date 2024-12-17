@@ -7,6 +7,9 @@ class LogInButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
 
+  final double _buttonheight = 60;
+  final double _buttonWidth = 0.886;
+
   const LogInButton({
     super.key,
     required this.onPressed,
@@ -18,7 +21,7 @@ class LogInButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.teal,
-        fixedSize: Size(DeviceSize.width! * 0.886, 60),
+        fixedSize: Size(DeviceSize.width! * _buttonWidth, _buttonheight),
         shape: const RoundedRectangleBorder(
           borderRadius: AppBorderRadius.small,
         ),

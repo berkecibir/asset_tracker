@@ -20,4 +20,23 @@ class AppTexts {
   static const splashPageId = 'Splash';
   static const loginPageId = 'Login';
   static const homePageId = 'Home';
+
+  // hint text strings
+
+  static const mailHint = 'E-Posta';
+  static const passwordHint = 'Şifre';
+
+  // service strings
+
+  static const userNotFound = 'Kullanıcı bulunamadı';
+  static const userNotFoundEmail =
+      'Bu e-posta adresi ile kullanıcı bulunamadı.';
+
+  static const wrongPassword = 'Yanlış Şifre';
+  static const enteredWrongPassword = 'Yanlış şifre girildi.';
+  static const errorOccurred = 'Hata meydana geldi:';
+
+  // snackbar message
+
+  static const errorOccurredLogin = 'Giriş yapılırken bir hata oluştu:';
 }

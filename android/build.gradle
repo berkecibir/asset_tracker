@@ -16,3 +16,159 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+//--------------------
+/* plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dev.flutter.flutter-gradle-plugin'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace = "com.example.asset_tracker"
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.example.asset_tracker"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode flutter.versionCode.toInteger()
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'my-key-alias'
+            keyPassword 'my-key-password'
+            storeFile file('/path/to/keystore.jks')
+            storePassword 'my-store-password'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.7.0') // Firebase BOM
+    implementation 'com.google.firebase:firebase-analytics' // Firebase Analytics
+} */
+
+// -------------------
+
+/* ext {
+    kotlin_version = '1.8.22'  // Burada Kotlin sürümünü belirliyoruz.
+}
+buildscript {
+         plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id("com.google.gms.google-services")
+}
+    repositories {
+        google()
+        mavenCentral()
+         dependencies {
+        // Burada classpath'ı buildscript bloğuna ekliyoruz.
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.2'
+    }
+   
+    }
+
+  
+}
+
+
+
+android {
+    namespace = "com.example.asset_tracker"
+    compileSdkVersion 33
+    ndkVersion "21.3.6528147"
+    targetSdkVersion 33
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.asset_tracker"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'my-key-alias'
+            keyPassword 'my-key-password'
+            storeFile file('/path/to/keystore.jks')
+            storePassword 'my-store-password'
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+}
+  
+
+/* allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        id("com.google.gms.google-services") version "4.4.2" apply false
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+ */

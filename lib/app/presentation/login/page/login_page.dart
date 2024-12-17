@@ -2,12 +2,12 @@ import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/core/utils/validators/form_validator.dart';
 import 'package:asset_tracker/app/core/widgets/device_padding/device_padding.dart';
 import 'package:asset_tracker/app/core/widgets/device_spacing/device_spacing.dart';
-import 'package:asset_tracker/app/core/widgets/navigation_helper/navigation_helper.dart';
-import 'package:asset_tracker/app/presentation/home/page/home_page.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../providers/auth_view_model/auth_view_model.dart';
 import '../../widgets/auth/auth_greet_text.dart';
 import '../../widgets/auth/auth_text_form_field.dart';
+import '../../widgets/auth/form_handlers.dart';
 import '../../widgets/login_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,11 +18,6 @@ class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
-
-// login içinde olacaklar
-// greeting text
-// form => email and password
-// button
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController mailController = TextEditingController();
@@ -38,8 +33,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
     return GestureDetector(
-      // ekrana tıklandığında her şeyi kapatır
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -54,8 +49,9 @@ class _LoginPageState extends State<LoginPage> {
                 const Center(child: AuthGreetText()),
                 DeviceSpacing.large.height,
                 AuthTextFormField.mail(
-                    validator: FormValidator.validateEmail,
-                    controller: mailController),
+                  validator: FormValidator.validateEmail,
+                  controller: mailController,
+                ),
                 DeviceSpacing.large.height,
                 AuthTextFormField.password(
                   controller: passwordController,
@@ -63,17 +59,17 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 DeviceSpacing.large.height,
                 LogInButton(
-                  onPressed: () {
-                    if (key.currentState?.validate() ?? false) {
-                      debugPrint('Form İşlemleri tamamdır');
-                      Navigation.pushReplace(page: const HomePage());
-                      // form işlemi tamamlanmazsa debugda yazar
-                    } else {
-                      debugPrint('Form İşlemleri tamamlanamadı');
-                    }
+                  onPressed: () async {
+                    await handleSignUp(
+                      authViewModel: authViewModel,
+                      formKey: key,
+                      emailController: mailController,
+                      passwordController: passwordController,
+                      context: context,
+                    );
                   },
                   text: AppTexts.loginButtonTitle,
-                ),
+                )
               ],
             ),
           ),
