@@ -9,7 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    # animation text
   animated_text_kit: ^4.2.2
+  # firebase packages
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.4
+  # state management
+  provider: ^6.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

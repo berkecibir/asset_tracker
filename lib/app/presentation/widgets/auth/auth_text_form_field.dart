@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 
 class AuthTextFormField extends StatelessWidget {
@@ -20,7 +21,7 @@ class AuthTextFormField extends StatelessWidget {
   }) {
     return AuthTextFormField(
       isObscure: false,
-      hintText: 'E-Posta',
+      hintText: AppTexts.mailHint,
       validator: validator,
       controller: controller,
     );
@@ -33,7 +34,7 @@ class AuthTextFormField extends StatelessWidget {
   }) {
     return AuthTextFormField(
       isObscure: true,
-      hintText: 'Şifre',
+      hintText: AppTexts.passwordHint,
       validator: validator,
       controller: controller,
     );
