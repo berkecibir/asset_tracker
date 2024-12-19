@@ -38,8 +38,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   String _mapErrorCodeToMessage(String errorCode) {
     const errorMessages = {
-      'user-not-found': AppTexts.userNotFound,
-      'wrong-password': AppTexts.wrongPassword,
+      AppTexts.userNotFound: AppTexts.userNotFound,
+      AppTexts.wrongPassword: AppTexts.wrongPassword,
     };
     return errorMessages[errorCode] ?? AppTexts.errorOccurred;
   }

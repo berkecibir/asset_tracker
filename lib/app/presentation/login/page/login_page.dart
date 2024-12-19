@@ -19,7 +19,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with LogInHelper {
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> key = GlobalKey();
@@ -34,6 +34,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    Future _onSignInPressed() async {
+      await handleSignUp(
+        authViewModel: authViewModel,
+        formKey: key,
+        emailController: mailController,
+        passwordController: passwordController,
+        context: context,
+      );
+    }
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -59,17 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 DeviceSpacing.large.height,
                 LogInButton(
-                  onPressed: () async {
-                    await handleSignUp(
-                      authViewModel: authViewModel,
-                      formKey: key,
-                      emailController: mailController,
-                      passwordController: passwordController,
-                      context: context,
-                    );
-                  },
+                  onPressed: _onSignInPressed,
                   text: AppTexts.loginButtonTitle,
-                )
+                ),
               ],
             ),
           ),
