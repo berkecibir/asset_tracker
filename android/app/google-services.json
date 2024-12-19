@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "961080775596",
+    "project_id": "assettrac-f4fce",
+    "storage_bucket": "assettrac-f4fce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961080775596:android:f0cfb8ba91f2ca72bee009",
+        "android_client_info": {
+          "package_name": "com.example.asset_tracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoaUulOnTjOq6TSdfxT8EXR86hexXyVnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

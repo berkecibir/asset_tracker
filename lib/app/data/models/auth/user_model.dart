@@ -2,7 +2,7 @@ class UserModel {
   final String email;
   final String password;
 
-  UserModel(
+  const UserModel(
     this.email,
     this.password,
   );
