@@ -48,34 +48,36 @@ class _LoginPageState extends State<LoginPage> with LogInHelper {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Padding(
-          padding: DevicePadding.small.onlyHorizontal,
-          child: Form(
-            key: key,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Center(child: AuthGreetText()),
-                DeviceSpacing.large.height,
-                AuthTextFormField.mail(
-                  validator: FormValidator.validateEmail,
-                  controller: mailController,
+        body: authViewModel.isLoading
+            ? const Center(child: CircularProgressIndicator.adaptive())
+            : Padding(
+                padding: DevicePadding.small.onlyHorizontal,
+                child: Form(
+                  key: key,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Center(child: AuthGreetText()),
+                      DeviceSpacing.large.height,
+                      AuthTextFormField.mail(
+                        validator: FormValidator.validateEmail,
+                        controller: mailController,
+                      ),
+                      DeviceSpacing.large.height,
+                      AuthTextFormField.password(
+                        controller: passwordController,
+                        validator: FormValidator.validatePassword,
+                      ),
+                      DeviceSpacing.large.height,
+                      LogInButton(
+                        onPressed: _onSignInPressed,
+                        text: AppTexts.loginButtonTitle,
+                      ),
+                    ],
+                  ),
                 ),
-                DeviceSpacing.large.height,
-                AuthTextFormField.password(
-                  controller: passwordController,
-                  validator: FormValidator.validatePassword,
-                ),
-                DeviceSpacing.large.height,
-                LogInButton(
-                  onPressed: _onSignInPressed,
-                  text: AppTexts.loginButtonTitle,
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }

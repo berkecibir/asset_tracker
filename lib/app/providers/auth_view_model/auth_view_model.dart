@@ -12,6 +12,10 @@ class AuthViewModel extends ChangeNotifier {
 
   bool get isAuthenticated => _user != null;
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
   void listenToAuthStateChanges() {
     _authRepository.authStateChanges.listen((userModel) {
       _user = userModel;
@@ -20,17 +24,30 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   Future<void> signUp(String email, String password) async {
+    _isLoading = true;
+    notifyListeners();
     try {
-      _user = await _authRepository.signUp(email, password);
+      _user = await _authRepository.signIn(email, password);
       notifyListeners();
     } catch (e) {
       rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
   Future<void> signOut() async {
-    await _authRepository.signOut();
-    _user = null;
-    notifyListeners();
+    try {
+      _isLoading = true;
+      notifyListeners();
+      await _authRepository.signOut();
+      _user = null;
+    } catch (e) {
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
