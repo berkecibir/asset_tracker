@@ -12,9 +12,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._authService);
 
   @override
-  Future<UserModel> signUp(String email, String password) async {
+  Future<UserModel> signIn(String email, String password) async {
     try {
-      final user = await _authService.createUser(email, password);
+      final user = await _authService.signIn(email, password);
       return UserModel(user?.email ?? '', password);
     } on FirebaseAuthException catch (e) {
       throw FirebaseauthException(_mapErrorCodeToMessage(e.code));
