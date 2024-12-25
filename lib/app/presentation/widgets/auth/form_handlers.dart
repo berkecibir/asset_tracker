@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:asset_tracker/app/presentation/home/page/home_page.dart';
 import '../../../core/widgets/navigation_helper/navigation_helper.dart';
 import '../../../providers/auth_view_model/auth_view_model.dart';
+import '../../login/page/login_page.dart';
 
-mixin LogInHelper {
-  Future<void> handleSignUp({
+mixin LogInHelper on State<LoginPage> {
+  Future<void> handleSignIn({
     required AuthViewModel authViewModel,
     required GlobalKey<FormState> formKey,
     required TextEditingController emailController,
@@ -14,7 +15,7 @@ mixin LogInHelper {
   }) async {
     if (validatorForm(formKey)) {
       try {
-        await authViewModel.signUp(
+        await authViewModel.signIn(
           emailController.text.trim(),
           passwordController.text.trim(),
         );
@@ -42,6 +43,20 @@ mixin LogInHelper {
   void showErrorSnackBar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
+    );
+  }
+
+  Future<void> onSignInPressed(AuthViewModel authViewModel) async {
+    final formKey = authViewModel.key;
+    final emailController = authViewModel.mailController;
+    final passwordController = authViewModel.passwordController;
+
+    await handleSignIn(
+      authViewModel: authViewModel,
+      formKey: formKey,
+      emailController: emailController,
+      passwordController: passwordController,
+      context: context,
     );
   }
 }

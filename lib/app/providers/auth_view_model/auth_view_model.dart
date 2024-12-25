@@ -3,7 +3,19 @@ import 'package:flutter/material.dart';
 import '../../data/models/auth/user_model.dart';
 import '../../data/repository/auth/auth_repository.dart';
 
-class AuthViewModel extends ChangeNotifier {
+class AuthViewModel with ChangeNotifier {
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> key = GlobalKey();
+
+  @override
+  void dispose() {
+    mailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
+
   final AuthRepository _authRepository;
   AuthViewModel(this._authRepository);
 
@@ -23,7 +35,7 @@ class AuthViewModel extends ChangeNotifier {
     });
   }
 
-  Future<void> signUp(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     _isLoading = true;
     notifyListeners();
     try {

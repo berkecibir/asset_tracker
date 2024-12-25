@@ -20,29 +20,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LogInHelper {
-  TextEditingController mailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> key = GlobalKey();
+  late final AuthViewModel authViewModel;
 
   @override
-  void dispose() {
-    mailController.dispose();
-    passwordController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    Future _onSignInPressed() async {
-      await handleSignUp(
-        authViewModel: authViewModel,
-        formKey: key,
-        emailController: mailController,
-        passwordController: passwordController,
-        context: context,
-      );
-    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -53,7 +45,7 @@ class _LoginPageState extends State<LoginPage> with LogInHelper {
             : Padding(
                 padding: DevicePadding.small.onlyHorizontal,
                 child: Form(
-                  key: key,
+                  key: authViewModel.key,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,16 +54,16 @@ class _LoginPageState extends State<LoginPage> with LogInHelper {
                       DeviceSpacing.large.height,
                       AuthTextFormField.mail(
                         validator: FormValidator.validateEmail,
-                        controller: mailController,
+                        controller: authViewModel.mailController,
                       ),
                       DeviceSpacing.large.height,
                       AuthTextFormField.password(
-                        controller: passwordController,
+                        controller: authViewModel.passwordController,
                         validator: FormValidator.validatePassword,
                       ),
                       DeviceSpacing.large.height,
                       LogInButton(
-                        onPressed: _onSignInPressed,
+                        onPressed: () => onSignInPressed(authViewModel),
                         text: AppTexts.loginButtonTitle,
                       ),
                     ],
