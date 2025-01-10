@@ -44,4 +44,5 @@ class AppTexts {
   static const homePageTitle = 'Harem Altın Verileri';
   static const fetchDataButton = 'Verileri Çek';
   static const noDataMessage = 'Henüz veri yok, "Verileri Çek" butonuna basın.';
+  static const priceAsTL = 'TL';
 }

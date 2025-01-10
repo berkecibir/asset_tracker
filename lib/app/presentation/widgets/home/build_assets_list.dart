@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/constants/app_texts.dart';
 import '../../../providers/home_view_model/home_view_model.dart';
 
 class BuildAssetsList extends StatelessWidget {
@@ -19,7 +20,7 @@ class BuildAssetsList extends StatelessWidget {
         return ListTile(
           leading: const Icon(Icons.currency_exchange),
           title: Text(gold.name),
-          subtitle: Text('${gold.price} TL'),
+          subtitle: Text('${gold.price} ${AppTexts.priceAsTL}'),
         );
       },
     );
