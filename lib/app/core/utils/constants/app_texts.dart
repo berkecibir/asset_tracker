@@ -39,4 +39,9 @@ class AppTexts {
   // snackbar message
 
   static const errorOccurredLogin = 'Giriş yapılırken bir hata oluştu:';
+
+  // home page strings
+  static const homePageTitle = 'Harem Altın Verileri';
+  static const fetchDataButton = 'Verileri Çek';
+  static const noDataMessage = 'Henüz veri yok, "Verileri Çek" butonuna basın.';
 }

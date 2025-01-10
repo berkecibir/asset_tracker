@@ -16,7 +16,9 @@ dependencies:
   firebase_auth: ^5.3.4
   # state management
   provider: ^6.1.2
-
+  # socket
+  web_socket_channel:
+  flutter_dotenv: ^5.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

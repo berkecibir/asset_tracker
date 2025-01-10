@@ -5,9 +5,12 @@ import 'package:asset_tracker/app/core/widgets/navigation_helper/navigation_help
 import 'package:asset_tracker/app/presentation/splash/page/splash_page.dart';
 import 'package:asset_tracker/app/providers/providers_set_up/providers_set_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   await AppInit.initialize();
   runApp(const MainApp());
 }

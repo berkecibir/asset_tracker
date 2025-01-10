@@ -44,3 +44,6 @@ app.*.map.json
 
 # Firebase Config
 /src/google-services.json
+
+# Environment variables
+.env
