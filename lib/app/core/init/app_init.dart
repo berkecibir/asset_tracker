@@ -12,7 +12,9 @@ class AppInit {
     await Firebase.initializeApp();
 
     // .env dosyasını yükle
-    await dotenv.load(fileName: ".env");
+    // dotenv yüklenirken load path i .env dosyasını kabul etmiyor.
+    // sorun asset/.env ile relative path verilerek çözüldü.
+    await dotenv.load(fileName: "assets/.env");
   }
 
   static void initDeviceSize(BuildContext context) {
