@@ -1,3 +1,5 @@
+import 'package:asset_tracker/app/core/exception/websocket_exception.dart';
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/data/models/assets/assets_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,26 +15,31 @@ class HomeViewModel extends ChangeNotifier {
   List<AssetsModel> assets = [];
 
   void connectToSocket() {
-    final socketUrl = dotenv.env['SOCKET_URL'] ?? '';
+    final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
     _webSocketService.connect(socketUrl);
     _webSocketService.stream.listen(
       (event) async {
         try {
-          if (event.startsWith('42[')) {
+          if (event.startsWith(AppTexts.startsWith42)) {
             final jsonData = event.substring(2);
             final parsedAssets = await _assetsRepository.parseAssets(jsonData);
             assets = parsedAssets;
             notifyListeners();
           }
-        } catch (e) {
-          debugPrint('WebSocket verisi işlenirken hata: $e');
+        } on Exception catch (e) {
+          throw WebsocketException('${AppTexts.errorParsingWebsocket} $e');
         }
       },
     );
   }
 
+  void updateAssets(List<AssetsModel> newAssets) {
+    assets = newAssets;
+    notifyListeners();
+  }
+
   void fetchData() {
-    _webSocketService.sendMessage('40');
+    _webSocketService.sendMessage(AppTexts.starsWith40);
   }
 
   void disconnectFromSocket() {

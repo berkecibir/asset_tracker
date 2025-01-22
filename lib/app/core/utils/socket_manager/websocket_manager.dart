@@ -1,5 +1,8 @@
-import 'dart:convert';
-
+/* import 'dart:convert';
+import 'dart:io';
+import 'package:asset_tracker/app/core/exception/websocket_exception.dart';
+import 'package:asset_tracker/app/core/sizes/app_text_sizes.dart';
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -8,18 +11,18 @@ class WebsocketManager {
   late final String _url;
   late WebSocketChannel _channel;
   webSocketManager() {
-    _url = dotenv.env['SOCKET_URL'] ?? '';
+    _url = dotenv.env[AppTexts.socketUrl] ?? '';
     if (_url.isEmpty) {
-      throw Exception("WebSocket URL is not defined in .env file.");
+      throw WebsocketException(AppTexts.urlIsNotDefined);
     }
   }
 
   void connect() {
     try {
       _channel = WebSocketChannel.connect(Uri.parse(_url));
-      _channel.sink.add('40');
-    } catch (e) {
-      debugPrint('Error connecting to WebSocket: $e');
+      _channel.sink.add(AppTexts.starsWith40);
+    } on Exception catch (e) {
+      throw WebsocketException('${AppTexts.errorConnectingWebsocket} $e');
     }
   }
 
@@ -27,32 +30,34 @@ class WebsocketManager {
     return _channel.stream.map((event) {
       try {
         if (event is String) {
-          if (event.startsWith('42[')) {
+          if (event.startsWith(AppTexts.startsWith42)) {
             return jsonDecode(event.substring(2));
           }
           return event;
         }
-      } catch (e) {
-        debugPrint("Error processing WebSocket event: $e");
+      } on FormatException catch (e) {
+        WebSocketException('${AppTexts.errorParsingWebsocket} $e');
       }
-      return null;
+    }).handleError((error) {
+      throw WebSocketException('${AppTexts.stremError} $error');
     });
   }
 
   void send(String message) {
     try {
       _channel.sink.add(message);
-    } catch (e) {
-      debugPrint("Error sending message: $e");
+    } on Exception catch (e) {
+      throw WebsocketException('${AppTexts.errorSendingMesage} $e');
     }
   }
 
   void disconnect() {
     try {
       _channel.sink.close();
-      debugPrint("WebSocket disconnected.");
-    } catch (e) {
-      debugPrint("Error disconnecting WebSocket: $e");
+      debugPrint(AppTexts.websocketDisconnected);
+    } on Exception catch (e) {
+      throw WebsocketException('${AppTexts.errorDisconnectWebsocket} $e');
     }
   }
 }
+ */

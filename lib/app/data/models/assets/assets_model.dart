@@ -11,10 +11,16 @@ class AssetsModel {
     );
   }
 
-  static double _parseToDouble(dynamic value) {
-    if (value == null) return 0.0;
+  //final price = double.tryParse((json['satis'] as num? ?? 0).toString()) ?? 0.0;
+
+  static double _parseToDouble(dynamic json) {
+    final price =
+        double.tryParse((json['satis'] as num? ?? 0).toString()) ?? 0.0;
+    return price;
+
+    /* if (value == null) return 0.0;
     if (value is String) return double.tryParse(value) ?? 0.0;
     if (value is int || value is double) return value.toDouble();
-    return 0.0;
+    return 0.0; */
   }
 }

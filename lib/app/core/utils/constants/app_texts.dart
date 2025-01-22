@@ -41,8 +41,27 @@ class AppTexts {
   static const errorOccurredLogin = 'Giriş yapılırken bir hata oluştu:';
 
   // home page strings
-  static const homePageTitle = 'Harem Altın Verileri';
+  static const homePageTitle = 'Asset Tracker';
   static const fetchDataButton = 'Verileri Çek';
   static const noDataMessage = 'Henüz veri yok, "Verileri Çek" butonuna basın.';
   static const priceAsTL = 'TL';
+
+  // socket url strings
+  static const socketUrl = 'SOCKET_URL';
+
+  // websocket exceptions strings
+
+  static const urlIsNotDefined = "WebSocket URL is not defined in .env file.";
+  static const errorConnectingWebsocket = 'Error Connecting to Websocket:';
+  static const errorParsingWebsocket = 'Error parsing WebSocket event:';
+  static const stremError = 'Stream error:';
+  static const errorSendingMesage = 'Error Sending Message:';
+  static const websocketDisconnected = 'WebSocket disconnected.';
+  static const errorDisconnectWebsocket = 'Error Disconnecting Websocket:';
+  static const startsWith42 = "42[";
+  static const starsWith40 = '40';
+
+  // IAssetRepository strings
+  static const priceChanged = 'price_changed';
+  static const data = 'data';
 }
