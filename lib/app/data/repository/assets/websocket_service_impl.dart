@@ -7,10 +7,15 @@ import 'websocket_service.dart';
 
 class WebSocketService implements IWebSocketService {
   late WebSocketChannel _channel;
-  final _controller = StreamController<String>();
+  StreamController<String>? _controller;
 
   @override
-  Stream<String> get stream => _controller.stream;
+  Stream<String> get stream {
+    if (_controller == null || _controller!.isClosed) {
+      _controller = StreamController<String>.broadcast();
+    }
+    return _controller!.stream;
+  }
 
   @override
   void connect(String url) {
@@ -23,11 +28,11 @@ class WebSocketService implements IWebSocketService {
       _channel.stream.listen(
         (data) {
           debugPrint("WebSocket'ten gelen veri: $data");
-          _controller.add(data);
+          _controller?.add(data);
         },
-        onDone: () => _controller.close(),
+        onDone: () => _controller?.close(),
         onError: (error) {
-          _controller.addError(error);
+          _controller?.addError(error);
           debugPrint("WebSocket bağlantısı hatası: $error");
         },
       );
@@ -44,72 +49,7 @@ class WebSocketService implements IWebSocketService {
   @override
   void closeConnection() {
     _channel.sink.close();
-    _controller.close();
+    _controller?.close();
+    _controller = null;
   }
 }
-/* import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'websocket_service.dart';
-
-class WebSocketService implements IWebSocketService {
-  late WebSocketChannel _channel;
-  final _controller = StreamController<String>();
-
-  @override
-  Stream<String> get stream => _controller.stream;
-  @override
-  void connect(String url) {
-    debugPrint("Bağlanılmaya çalışılan URL: $url");
-    try {
-      _channel = WebSocketChannel.connect(Uri.parse(url));
-      _channel.stream.listen(
-        (data) {
-          debugPrint("WebSocket'ten gelen veri: $data");
-          _controller.add(data);
-        },
-        onDone: () {
-          debugPrint("WebSocket bağlantısı kapatıldı.");
-          _controller.close();
-        },
-        onError: (error) {
-          debugPrint("WebSocket bağlantısı hatası: $error");
-          _controller.addError(error);
-        },
-      );
-    } catch (e) {
-      debugPrint("WebSocket bağlantısı başlatılamadı: $e");
-      _controller.addError(e);
-    }
-  }
-
-  /* @override
-  void connect(String url) {
-    debugPrint('$url bağlanmaya çalışıyor');
-
-    _channel = WebSocketChannel.connect(Uri.parse(url));
-    _channel.stream.listen(
-      (data) {
-        debugPrint("WebSocket'ten gelen veri: $data");
-        _controller.add(data);
-      },
-      onDone: () => _controller.close(),
-      onError: (error) {
-        _controller.addError(error);
-        debugPrint("WebSocket bağlantısı hatası: $error");
-      },
-    );
-  } */
-
-  @override
-  void sendMessage(String message) {
-    _channel.sink.add(message);
-  }
-
-  @override
-  void closeConnection() {
-    _channel.sink.close();
-    _controller.close();
-  }
-}
- */

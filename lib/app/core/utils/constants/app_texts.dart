@@ -19,7 +19,9 @@ class AppTexts {
   // App Pages Id
   static const splashPageId = 'Splash';
   static const loginPageId = 'Login';
-  static const homePageId = 'Home';
+  static const homePageContentId = 'Home';
+  static const profilePageId = 'Profile';
+  static const homePageId = 'HomePage';
 
   // hint text strings
 
@@ -41,10 +43,12 @@ class AppTexts {
   static const errorOccurredLogin = 'Giriş yapılırken bir hata oluştu:';
 
   // home page strings
-  static const homePageTitle = 'Asset Tracker';
-  static const fetchDataButton = 'Verileri Çek';
-  static const noDataMessage = 'Henüz veri yok, "Verileri Çek" butonuna basın.';
+  static const appBarTitle = 'Asset Tracker';
+  static const fetchDataButton = 'Varlıkları Görüntüle';
+  static const noDataMessage =
+      'Henüz veri yok, "Varlıkları Görüntüle" butonuna basın.';
   static const priceAsTL = 'TL';
+  static const searchingAssets = 'Varlıkları ara...';
 
   // socket url strings
   static const socketUrl = 'SOCKET_URL';
@@ -64,4 +68,20 @@ class AppTexts {
   // IAssetRepository strings
   static const priceChanged = 'price_changed';
   static const data = 'data';
+
+  // assets model strings
+
+  static const jsonData = 'JSON Data:';
+  static const code = 'code';
+  static const unKnown = 'Bilinmiyor';
+  static const sale = 'satis';
+
+  // profile page strings
+  static const icon = 'icon';
+  static const title = 'title';
+  static const logOut = 'Çıkış Yap';
+  static const randomImage = 'https://picsum.photos/200';
+  static const editProfile = 'Profili Düzenle';
+  static const report = 'Hata Bildir';
+  static const userName = 'Berke Atahan';
 }

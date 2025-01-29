@@ -1,6 +1,6 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
-import 'package:asset_tracker/app/presentation/home/page/home_page.dart';
+import 'package:asset_tracker/app/presentation/home_content/page/home_page_content.dart';
 import '../../../core/widgets/navigation_helper/navigation_helper.dart';
 import '../../../providers/auth_view_model/auth_view_model.dart';
 import '../../login/page/login_page.dart';
@@ -37,7 +37,7 @@ mixin LogInHelper on State<LoginPage> {
   }
 
   void navigateToHome(BuildContext context) {
-    Navigation.pushReplace(page: const HomePage());
+    Navigation.pushReplace(page: const HomePageContent());
   }
 
   void showErrorSnackBar(BuildContext context, String message) {

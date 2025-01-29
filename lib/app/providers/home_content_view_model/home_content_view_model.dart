@@ -6,13 +6,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../../data/repository/assets/websokcet_repository.dart';
 import '../../data/repository/assets/websocket_service.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class HomeContentViewModel extends ChangeNotifier {
   final IWebSocketService _webSocketService;
   final IAssetsRepository _assetsRepository;
 
-  HomeViewModel(this._webSocketService, this._assetsRepository);
+  HomeContentViewModel(this._webSocketService, this._assetsRepository);
 
   List<AssetsModel> assets = [];
+  List<AssetsModel> _filteredAssets = [];
+
+  List<AssetsModel> get displayedAssets =>
+      _filteredAssets.isNotEmpty ? _filteredAssets : assets;
 
   void connectToSocket() {
     final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
@@ -24,6 +28,7 @@ class HomeViewModel extends ChangeNotifier {
             final jsonData = event.substring(2);
             final parsedAssets = await _assetsRepository.parseAssets(jsonData);
             assets = parsedAssets;
+            _filteredAssets.clear();
             notifyListeners();
           }
         } on Exception catch (e) {
@@ -33,8 +38,20 @@ class HomeViewModel extends ChangeNotifier {
     );
   }
 
+  void filterAssets(String query) {
+    if (query.isEmpty) {
+      _filteredAssets.clear();
+    } else {
+      _filteredAssets = assets.where((asset) {
+        return asset.displayName.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    }
+    notifyListeners();
+  }
+
   void updateAssets(List<AssetsModel> newAssets) {
     assets = newAssets;
+    _filteredAssets.clear();
     notifyListeners();
   }
 
