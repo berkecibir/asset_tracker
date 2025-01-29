@@ -1,8 +1,6 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/enum/asset_type_enum.dart';
-
 class AssetsModel {
   final String name;
   final double price;

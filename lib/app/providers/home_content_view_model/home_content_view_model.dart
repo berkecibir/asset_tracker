@@ -14,7 +14,7 @@ class HomeContentViewModel extends ChangeNotifier {
 
   List<AssetsModel> assets = [];
   List<AssetsModel> _filteredAssets = [];
-
+  TextEditingController? editingController;
   List<AssetsModel> get displayedAssets =>
       _filteredAssets.isNotEmpty ? _filteredAssets : assets;
 
@@ -36,6 +36,13 @@ class HomeContentViewModel extends ChangeNotifier {
         }
       },
     );
+  }
+
+  void updateEditingController(TextEditingController controller) {
+    editingController = controller;
+    editingController?.addListener(() {
+      filterAssets(editingController?.text ?? '');
+    });
   }
 
   void filterAssets(String query) {
