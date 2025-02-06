@@ -14,13 +14,13 @@ class BuildAssetsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemCount = viewModel.displayedAssets.length;
+    final itemCount = viewModel.filteredAssets.length;
 
     return ListView.separated(
       separatorBuilder: (context, index) => const Divider(),
       itemCount: itemCount,
       itemBuilder: (context, index) {
-        final gold = viewModel.displayedAssets[index];
+        final gold = viewModel.filteredAssets[index];
         final assetType = AssetType.values[index % AssetType.values.length];
         return ListTile(
           leading: const Icon(Icons.currency_exchange),

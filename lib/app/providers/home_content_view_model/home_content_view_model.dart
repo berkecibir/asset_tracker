@@ -13,10 +13,53 @@ class HomeContentViewModel extends ChangeNotifier {
   HomeContentViewModel(this._webSocketService, this._assetsRepository);
 
   List<AssetsModel> assets = [];
-  List<AssetsModel> _filteredAssets = [];
+  String _filterQuery = '';
+
   TextEditingController? editingController;
-  List<AssetsModel> get displayedAssets =>
-      _filteredAssets.isNotEmpty ? _filteredAssets : assets;
+
+  String get filterQuery => _filterQuery;
+
+  set filterQuery(String value) {
+    _filterQuery = value;
+    notifyListeners();
+  }
+
+  List<AssetsModel> get filteredAssets {
+    debugPrint("Filtreleme Çalıştı: $_filterQuery");
+    debugPrint("Mevcut Asset Sayısı: ${assets.length}");
+
+    for (var asset in assets) {
+      debugPrint(
+          "Asset Name: ${asset.name}, Display Name: ${asset.displayName}"); // yapılan aramalar
+    }
+
+    if (_filterQuery.isEmpty) {
+      debugPrint("Tüm verileri gösteriyorum..."); // assetlerin hepsi
+      return assets;
+    }
+
+    final filtered = assets.where((asset) {
+      final query = _filterQuery.toLowerCase();
+      final nameMatch = asset.name.toLowerCase().contains(query);
+      final displayMatch = asset.displayName.toLowerCase().contains(query);
+      return nameMatch || displayMatch;
+    }).toList();
+
+    debugPrint("Filtre Sonrası Kalan Öğeler: ${filtered.length}");
+    return filtered;
+  }
+
+/*   List<AssetsModel> get filteredAssets {
+    if (_filterQuery.isEmpty) {
+      return assets;
+    }
+    return assets.where((asset) {
+      return asset.displayName
+              .toLowerCase()
+              .contains(_filterQuery.toLowerCase()) ||
+          asset.name.toLowerCase().contains(_filterQuery.toLowerCase());
+    }).toList();
+  } */
 
   void connectToSocket() {
     final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
@@ -28,7 +71,6 @@ class HomeContentViewModel extends ChangeNotifier {
             final jsonData = event.substring(2);
             final parsedAssets = await _assetsRepository.parseAssets(jsonData);
             assets = parsedAssets;
-            _filteredAssets.clear();
             notifyListeners();
           }
         } on Exception catch (e) {
@@ -41,24 +83,12 @@ class HomeContentViewModel extends ChangeNotifier {
   void updateEditingController(TextEditingController controller) {
     editingController = controller;
     editingController?.addListener(() {
-      filterAssets(editingController?.text ?? '');
+      filterQuery = editingController?.text ?? '';
     });
-  }
-
-  void filterAssets(String query) {
-    if (query.isEmpty) {
-      _filteredAssets.clear();
-    } else {
-      _filteredAssets = assets.where((asset) {
-        return asset.displayName.toLowerCase().contains(query.toLowerCase());
-      }).toList();
-    }
-    notifyListeners();
   }
 
   void updateAssets(List<AssetsModel> newAssets) {
     assets = newAssets;
-    _filteredAssets.clear();
     notifyListeners();
   }
 

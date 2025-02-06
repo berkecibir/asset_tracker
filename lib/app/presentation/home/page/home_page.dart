@@ -19,28 +19,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final homeViewModel = Provider.of<HomePageViewModel>(context);
 
-    return Scaffold(
-      body: PageView(
-        controller: homeViewModel.pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          HomePageContent(),
-          ProfilePage(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: homeViewModel.selectedIndex,
-        onTap: homeViewModel.onPageChange,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: PageView(
+          controller: homeViewModel.pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [
+            HomePageContent(),
+            ProfilePage(),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: homeViewModel.selectedIndex,
+          onTap: homeViewModel.onPageChange,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: AppTexts.homePageBottomNavBar,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: AppTexts.profileBottomNavBar,
+            ),
+          ],
+        ),
       ),
     );
   }

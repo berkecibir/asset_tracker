@@ -49,7 +49,8 @@ class AppTexts {
       'Henüz veri yok, "Varlıkları Görüntüle" butonuna basın.';
   static const priceAsTL = 'TL';
   static const searchingAssets = 'Varlıkları ara...';
-
+  static const homePageBottomNavBar = 'Ana Sayfa';
+  static const profileBottomNavBar = 'Profil';
   // socket url strings
   static const socketUrl = 'SOCKET_URL';
 
@@ -72,7 +73,7 @@ class AppTexts {
   // assets model strings
 
   static const jsonData = 'JSON Data:';
-  static const code = 'code';
+  static const code = 'code:';
   static const unKnown = 'Bilinmiyor';
   static const sale = 'satis';
 

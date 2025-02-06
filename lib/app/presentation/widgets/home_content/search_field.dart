@@ -16,15 +16,18 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-        controller: viewModel.editingController,
-        onChanged: (value) {
-          viewModel.filterAssets(value);
-        },
-        cursorColor: Colors.black,
-        decoration: InputDecoration(
-            hintText: AppTexts.searchingAssets,
-            suffixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(
-                borderRadius: MyBorderRadius.all(AppSizes.medium))));
+      controller: viewModel.editingController,
+      onChanged: (value) {
+        viewModel.filterQuery = value;
+      },
+      cursorColor: Colors.black,
+      decoration: InputDecoration(
+        hintText: AppTexts.searchingAssets,
+        suffixIcon: const Icon(Icons.search),
+        border: OutlineInputBorder(
+          borderRadius: MyBorderRadius.all(AppSizes.medium),
+        ),
+      ),
+    );
   }
 }

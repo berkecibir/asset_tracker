@@ -1,5 +1,3 @@
-import 'package:asset_tracker/app/core/border/my_border_radius.dart';
-import 'package:asset_tracker/app/core/sizes/app_sizes.dart';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/core/widgets/device_padding/device_padding.dart';
 import 'package:asset_tracker/app/core/widgets/device_spacing/device_spacing.dart';
@@ -11,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/utils/constants/app_text_style.dart';
 import '../../../providers/home_content_view_model/home_content_view_model.dart';
+import '../../widgets/appbar/custom_app_bar.dart';
 import '../../widgets/home_content/build_assets_list.dart';
 import '../../widgets/home_content/search_field.dart';
 
@@ -30,19 +29,7 @@ class _HomePageContentState extends State<HomePageContent> with HomeHelper {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            title: const Text(
-              AppTexts.appBarTitle,
-              style: kAppBar,
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigation.push(page: const ProfilePage());
-                  },
-                  icon: const Icon(Icons.person))
-            ],
-          ),
+          appBar: const CustomAppBar(),
           body: Column(children: [
             DeviceSpacing.large.height,
             Padding(

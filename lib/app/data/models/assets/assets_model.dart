@@ -1,6 +1,54 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/enum/asset_type_enum.dart';
+
+class AssetsModel {
+  final String name;
+  final double price;
+  final AssetType assetType;
+
+  const AssetsModel({
+    required this.name,
+    required this.price,
+    required this.assetType,
+  });
+
+  String get displayName => assetType.displayName;
+
+  factory AssetsModel.fromJson(Map<String, dynamic> json) {
+    debugPrint('${AppTexts.jsonData} $json');
+    return AssetsModel(
+      name: json[AppTexts.code] ?? AppTexts.unKnown,
+      price: _parseToDouble(json[AppTexts.sale]),
+      assetType: AssetType.values.firstWhere(
+        (e) => e.toString().split('.').last == json[AppTexts.code],
+        orElse: () => AssetType.altin,
+      ),
+    );
+  }
+
+  static double _parseToDouble(dynamic json) {
+    if (json == null) {
+      return 0.0;
+    }
+    if (json is num) {
+      return json.toDouble();
+    }
+    if (json is String) {
+      final parsedValue = double.tryParse(json);
+      if (parsedValue != null) {
+        return parsedValue;
+      }
+    }
+    return 0.0;
+  }
+}
+
+/* // ----------------------------------------------
+import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
+import 'package:flutter/material.dart';
+
 class AssetsModel {
   final String name;
   final double price;
@@ -47,4 +95,56 @@ class AssetsModel {
   }
 
   toLowerCase() {}
+} */
+
+
+
+
+//-----------------------------------------------------------------------
+
+/* import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
+import 'package:flutter/material.dart';
+
+import '../../../core/enum/asset_type_enum.dart';
+class AssetsModel {
+  final String name;
+  final double price;
+  final AssetType assetType;
+
+  const AssetsModel({
+    required this.name,
+    required this.price,
+    required this.assetType,
+  });
+
+  // **Güncellenmiş factory constructor**
+  factory AssetsModel.fromJson(Map<String, dynamic> json) {
+    debugPrint('${AppTexts.jsonData} $json');
+
+    return AssetsModel(
+      name: json[AppTexts.code] ?? AppTexts.unKnown,
+      price: _parseToDouble(json[AppTexts.sale]),
+      assetType: _parseAssetType(json[AppTexts.code]), // Yeni eklenen alan
+    );
+  }
+
+  static AssetType _parseAssetType(String? code) {
+    return AssetType.values.firstWhere(
+      (e) => e.toString().split('.').last.toLowerCase() == code?.toLowerCase(),
+      orElse: () => AssetType.altin, // Varsayılan değer
+    );
+  }
+
+  static double _parseToDouble(dynamic json) {
+    if (json == null) return 0.0;
+    if (json is num) return json.toDouble();
+    if (json is String) {
+      final parsedValue = double.tryParse(json);
+      if (parsedValue != null) return parsedValue;
+    }
+    return 0.0;
+  }
+
+  String get displayName => assetType.displayName; // Burada enum çağrılıyor
 }
+ */
