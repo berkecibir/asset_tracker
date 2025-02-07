@@ -45,8 +45,7 @@ class AppTexts {
   // home page strings
   static const appBarTitle = 'Asset Tracker';
   static const fetchDataButton = 'Varlıkları Görüntüle';
-  static const noDataMessage =
-      'Henüz veri yok, "Varlıkları Görüntüle" butonuna basın.';
+  static const noDataMessage = 'Henüz veri yok';
   static const priceAsTL = 'TL';
   static const searchingAssets = 'Varlıkları ara...';
   static const homePageBottomNavBar = 'Ana Sayfa';
@@ -65,6 +64,7 @@ class AppTexts {
   static const errorDisconnectWebsocket = 'Error Disconnecting Websocket:';
   static const startsWith42 = "42[";
   static const starsWith40 = '40';
+  static const startsWith0 = '0';
 
   // IAssetRepository strings
   static const priceChanged = 'price_changed';
@@ -73,7 +73,7 @@ class AppTexts {
   // assets model strings
 
   static const jsonData = 'JSON Data:';
-  static const code = 'code:';
+  static const code = 'code';
   static const unKnown = 'Bilinmiyor';
   static const sale = 'satis';
 

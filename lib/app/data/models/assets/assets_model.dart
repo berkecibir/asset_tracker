@@ -1,6 +1,4 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
-import 'package:flutter/material.dart';
-
 import '../../../core/enum/asset_type_enum.dart';
 
 class AssetsModel {
@@ -17,13 +15,19 @@ class AssetsModel {
   String get displayName => assetType.displayName;
 
   factory AssetsModel.fromJson(Map<String, dynamic> json) {
-    debugPrint('${AppTexts.jsonData} $json');
+    //debugPrint('${AppTexts.jsonData} $json');
+    final name = json[AppTexts.code] as String? ?? AppTexts.unKnown;
     return AssetsModel(
-      name: json[AppTexts.code] ?? AppTexts.unKnown,
+      name: name,
+      // json[AppTexts.code] ?? AppTexts.unKnown,
+
       price: _parseToDouble(json[AppTexts.sale]),
+
       assetType: AssetType.values.firstWhere(
-        (e) => e.toString().split('.').last == json[AppTexts.code],
-        orElse: () => AssetType.altin,
+        (type) => type.code == name,
+        orElse: () => AssetType.unknown,
+        /* (e) => e.toString().split('.').last == json[AppTexts.code],
+        orElse: () => AssetType.altin, */
       ),
     );
   }

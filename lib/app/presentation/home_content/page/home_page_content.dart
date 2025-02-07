@@ -23,6 +23,19 @@ class HomePageContent extends StatefulWidget {
 
 class _HomePageContentState extends State<HomePageContent> with HomeHelper {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      if (!mounted) {
+        return;
+      }
+      final viewModel =
+          Provider.of<HomeContentViewModel>(context, listen: false);
+      viewModel.fetchData();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeContentViewModel>(context);
     return GestureDetector(
@@ -39,14 +52,6 @@ class _HomePageContentState extends State<HomePageContent> with HomeHelper {
               ),
             ),
             DeviceSpacing.large.height,
-            Visibility(
-                visible: viewModel.assets.isEmpty,
-                child: CustomButton(
-                  onTap: () {
-                    viewModel.fetchData();
-                  },
-                  title: AppTexts.fetchDataButton,
-                )),
             Expanded(
                 child: viewModel.assets.isEmpty
                     ? const Center(

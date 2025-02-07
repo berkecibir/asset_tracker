@@ -4,6 +4,7 @@ import 'package:asset_tracker/app/core/routes/app_routes.dart';
 import 'package:asset_tracker/app/core/widgets/navigation_helper/navigation_helper.dart';
 import 'package:asset_tracker/app/presentation/home/page/home_page.dart';
 import 'package:asset_tracker/app/presentation/home_content/page/home_page_content.dart';
+import 'package:asset_tracker/app/presentation/login/page/login_page.dart';
 import 'package:asset_tracker/app/presentation/profile/page/profile_page.dart';
 import 'package:asset_tracker/app/providers/providers_set_up/providers_set_up.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class MainApp extends StatelessWidget {
         theme: AppTheme.appTheme,
         debugShowCheckedModeBanner: false,
         navigatorKey: Navigation.navigationKey,
-        initialRoute: HomePage.id,
+        initialRoute: LoginPage.id,
         routes: AppRoutes.routes,
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/core/enum/asset_type_enum.dart';
 import 'package:asset_tracker/app/core/exception/websocket_exception.dart';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/data/models/assets/assets_model.dart';
@@ -19,13 +20,20 @@ class HomeContentViewModel extends ChangeNotifier {
 
   String get filterQuery => _filterQuery;
 
+  final int _minimumFilterLength = 3;
+
   set filterQuery(String value) {
     _filterQuery = value;
     notifyListeners();
   }
 
   List<AssetsModel> get filteredAssets {
-    debugPrint("Filtreleme Çalıştı: $_filterQuery");
+    if (_filterQuery.length < _minimumFilterLength) {
+      return assets
+          .where((element) => element.assetType != AssetType.unknown)
+          .toList();
+    }
+    /*    debugPrint("Filtreleme Çalıştı: $_filterQuery");
     debugPrint("Mevcut Asset Sayısı: ${assets.length}");
 
     for (var asset in assets) {
@@ -36,30 +44,20 @@ class HomeContentViewModel extends ChangeNotifier {
     if (_filterQuery.isEmpty) {
       debugPrint("Tüm verileri gösteriyorum..."); // assetlerin hepsi
       return assets;
-    }
+    } */
 
     final filtered = assets.where((asset) {
       final query = _filterQuery.toLowerCase();
-      final nameMatch = asset.name.toLowerCase().contains(query);
+      //final nameMatch = asset.name.toLowerCase().contains(query);
       final displayMatch = asset.displayName.toLowerCase().contains(query);
-      return nameMatch || displayMatch;
+      final isKnown = asset.assetType == AssetType.unknown;
+      return displayMatch && !isKnown;
+      //return nameMatch || displayMatch;
     }).toList();
 
-    debugPrint("Filtre Sonrası Kalan Öğeler: ${filtered.length}");
+    //debugPrint("Filtre Sonrası Kalan Öğeler: ${filtered.length}");
     return filtered;
   }
-
-/*   List<AssetsModel> get filteredAssets {
-    if (_filterQuery.isEmpty) {
-      return assets;
-    }
-    return assets.where((asset) {
-      return asset.displayName
-              .toLowerCase()
-              .contains(_filterQuery.toLowerCase()) ||
-          asset.name.toLowerCase().contains(_filterQuery.toLowerCase());
-    }).toList();
-  } */
 
   void connectToSocket() {
     final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
@@ -67,17 +65,41 @@ class HomeContentViewModel extends ChangeNotifier {
     _webSocketService.stream.listen(
       (event) async {
         try {
-          if (event.startsWith(AppTexts.startsWith42)) {
-            final jsonData = event.substring(2);
-            final parsedAssets = await _assetsRepository.parseAssets(jsonData);
-            assets = parsedAssets;
-            notifyListeners();
+          /* if (event.startsWith(AppTexts.startsWith42)) */ {
+            if (event.startsWith(AppTexts.startsWith0)) {
+              _webSocketService.sendMessage(AppTexts.startsWith0);
+            } else if (event.startsWith(AppTexts.startsWith42)) {
+              final jsonData = event.substring(2);
+              final parsedAssets =
+                  await _assetsRepository.parseAssets(jsonData);
+              assets = _updateAssetList([...assets], parsedAssets);
+              notifyListeners();
+            }
           }
         } on Exception catch (e) {
           throw WebsocketException('${AppTexts.errorParsingWebsocket} $e');
         }
       },
+      onDone: () {
+        _webSocketService.sendMessage(AppTexts.starsWith40);
+      },
     );
+  }
+
+  List<AssetsModel> _updateAssetList(
+    List<AssetsModel> currentAssets,
+    List<AssetsModel> updateAssets,
+  ) {
+    final assetMap = {for (var asset in currentAssets) asset.name: asset};
+
+    for (var updateAssets in updateAssets) {
+      if (assetMap.containsKey(updateAssets.name)) {
+        assetMap[updateAssets.name] = updateAssets;
+      } else {
+        assetMap[updateAssets.name] = updateAssets;
+      }
+    }
+    return assetMap.values.toList();
   }
 
   void updateEditingController(TextEditingController controller) {

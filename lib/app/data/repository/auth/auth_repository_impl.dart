@@ -3,7 +3,6 @@ import 'package:asset_tracker/app/data/models/auth/user_model.dart';
 import 'package:asset_tracker/app/data/repository/auth/auth_repository.dart';
 import 'package:asset_tracker/app/data/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../../core/exception/firebaseauth_exception.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
