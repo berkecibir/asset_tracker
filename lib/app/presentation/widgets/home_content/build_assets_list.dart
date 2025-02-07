@@ -21,7 +21,7 @@ class BuildAssetsList extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         final gold = viewModel.filteredAssets[index];
-        final assetType = AssetType.values[index % AssetType.values.length];
+        final assetType = gold.assetType;
         return ListTile(
           leading: const Icon(Icons.currency_exchange),
           title: Text(
