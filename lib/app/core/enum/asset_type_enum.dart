@@ -1,49 +1,53 @@
 enum AssetType {
-  altin,
-  usdPure,
-  usdTry,
-  ons,
-  eurTry,
-  usdKg,
-  eurUsd,
-  eurKg,
-  ayar22,
-  gbpTry,
-  chfTry,
-  kulceAltin,
-  audTry,
-  xauXag,
-  ceyrekYeni,
-  cadTry,
-  ceyrekEski,
-  sarTry,
-  yarimYeni,
-  yarimEski,
-  jpyTry,
-  audUsd,
-  tekYeni,
-  tekEski,
-  sekTry,
-  ataYeni,
-  dkkTry,
-  ataEski,
-  nokTry,
-  ata5Yeni,
-  usdJpy,
-  ata5Eski,
-  gremeseYeni,
-  gremeseEski,
-  ayar14,
-  gumusTry,
-  xagUsd,
-  gumusUsd,
+  altin('ALTIN'),
+  usdPure('USDPURE'),
+  usdTry('USDTRY'),
+  ons('ONS'),
+  eurTry('EURTRY'),
+  usdKg('USDKG'),
+  eurUsd('EURUSD'),
+  eurKg('EURKG'),
+  ayar22('AYAR22'),
+  gbpTry('GBPTRY'),
+  chfTry('CHFTRY'),
+  kulceAltin('KULCEALTIN'),
+  audTry('AUDTRY'),
+  xauXag('XAUXAG'),
+  ceyrekYeni('CEYREK_YENI'),
+  cadTry('CADTRY'),
+  ceyrekEski('CEYREK_ESKI'),
+  sarTry('SARTRY'),
+  yarimYeni('YARIM_YENI'),
+  yarimEski('YARIM_ESKI'),
+  jpyTry('JPYTRY'),
+  audUsd('AUDUSD'),
+  tekYeni('TEK_YENI'),
+  tekEski('TEK_ESKI'),
+  sekTry('SEKTRY'),
+  ataYeni('ATA_YENI'),
+  dkkTry('DKKTRY'),
+  ataEski('ATA_ESKI'),
+  nokTry('NOKTRY'),
+  ata5Yeni('ATA5_YENI'),
+  usdJpy('USDJPY'),
+  ata5Eski('ATA5_ESKI'),
+  gremeseYeni('GREMESE_YENI'),
+  gremeseEski('GREMESE_ESKI'),
+  ayar14('AYAR14'),
+  gumusTry('GUMUSTRY'),
+  xagUsd('XAGUSD'),
+  gumusUsd('GUMUSUSD'),
+  unknown('-');
+
+  final String code;
+  const AssetType(this.code);
 }
 
 extension AssetTypeExtension on AssetType {
   String get displayName {
     switch (this) {
       case AssetType.altin:
-        return 'Altın';
+        return 'Gram Altın';
       case AssetType.usdPure:
         return 'Ham Dolar';
       case AssetType.usdTry:
@@ -59,7 +63,7 @@ extension AssetTypeExtension on AssetType {
       case AssetType.eurKg:
         return 'Euro/KG';
       case AssetType.ayar22:
-        return '22 Ayar Bilezik';
+        return '22 Ayar Altın';
       case AssetType.gbpTry:
         return 'Sterlin';
       case AssetType.chfTry:
@@ -118,6 +122,8 @@ extension AssetTypeExtension on AssetType {
         return 'Gümüş/Dolar';
       case AssetType.gumusUsd:
         return 'Gümüş USD';
+      case AssetType.unknown:
+        return 'Bilinmiyor';
     }
   }
 }

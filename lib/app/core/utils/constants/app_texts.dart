@@ -65,6 +65,7 @@ class AppTexts {
   static const errorDisconnectWebsocket = 'Error Disconnecting Websocket:';
   static const startsWith42 = "42[";
   static const starsWith40 = '40';
+  static const starsWith0 = '0';
 
   // IAssetRepository strings
   static const priceChanged = 'price_changed';
@@ -73,7 +74,7 @@ class AppTexts {
   // assets model strings
 
   static const jsonData = 'JSON Data:';
-  static const code = 'code:';
+  static const code = 'code';
   static const unKnown = 'Bilinmiyor';
   static const sale = 'satis';
 
