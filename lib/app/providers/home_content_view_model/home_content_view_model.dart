@@ -33,29 +33,14 @@ class HomeContentViewModel extends ChangeNotifier {
           .where((element) => element.assetType != AssetType.unknown)
           .toList();
     }
-    /*    debugPrint("Filtreleme Çalıştı: $_filterQuery");
-    debugPrint("Mevcut Asset Sayısı: ${assets.length}");
-
-    for (var asset in assets) {
-      debugPrint(
-          "Asset Name: ${asset.name}, Display Name: ${asset.displayName}"); // yapılan aramalar
-    }
-
-    if (_filterQuery.isEmpty) {
-      debugPrint("Tüm verileri gösteriyorum..."); // assetlerin hepsi
-      return assets;
-    } */
 
     final filtered = assets.where((asset) {
       final query = _filterQuery.toLowerCase();
-      //final nameMatch = asset.name.toLowerCase().contains(query);
       final displayMatch = asset.displayName.toLowerCase().contains(query);
       final isKnown = asset.assetType == AssetType.unknown;
       return displayMatch && !isKnown;
-      //return nameMatch || displayMatch;
     }).toList();
 
-    //debugPrint("Filtre Sonrası Kalan Öğeler: ${filtered.length}");
     return filtered;
   }
 
@@ -65,7 +50,7 @@ class HomeContentViewModel extends ChangeNotifier {
     _webSocketService.stream.listen(
       (event) async {
         try {
-          /* if (event.startsWith(AppTexts.startsWith42)) */ {
+          {
             if (event.startsWith(AppTexts.startsWith0)) {
               _webSocketService.sendMessage(AppTexts.startsWith0);
             } else if (event.startsWith(AppTexts.startsWith42)) {

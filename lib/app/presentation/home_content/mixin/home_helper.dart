@@ -7,6 +7,14 @@ import '../page/home_page_content.dart';
 mixin HomeHelper on State<HomePageContent> {
   @override
   void initState() {
+    Future.microtask(() {
+      if (!mounted) {
+        return;
+      }
+      final viewModel =
+          Provider.of<HomeContentViewModel>(context, listen: false);
+      viewModel.fetchData();
+    });
     super.initState();
     final viewModel = Provider.of<HomeContentViewModel>(context, listen: false);
     viewModel.connectToSocket();

@@ -1,9 +1,6 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
 import 'package:asset_tracker/app/core/widgets/device_padding/device_padding.dart';
 import 'package:asset_tracker/app/core/widgets/device_spacing/device_spacing.dart';
-import 'package:asset_tracker/app/core/widgets/navigation_helper/navigation_helper.dart';
-import 'package:asset_tracker/app/presentation/profile/page/profile_page.dart';
-import 'package:asset_tracker/app/presentation/widgets/custom_button.dart';
 import 'package:asset_tracker/app/presentation/home_content/mixin/home_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,19 +19,6 @@ class HomePageContent extends StatefulWidget {
 }
 
 class _HomePageContentState extends State<HomePageContent> with HomeHelper {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      if (!mounted) {
-        return;
-      }
-      final viewModel =
-          Provider.of<HomeContentViewModel>(context, listen: false);
-      viewModel.fetchData();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<HomeContentViewModel>(context);

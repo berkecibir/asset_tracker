@@ -17,9 +17,7 @@ void main() async {
     await dotenv.load(fileName: "assets/.env");
     debugPrint('ENV yüklendi: ${dotenv.env['SOCKET_URL']}');
     final socketUrl = dotenv.env['SOCKET_URL'];
-    debugPrint(
-        socketUrl); // uRL doğru mu: "wss://socket.haremaltin.com/socket.io/?EIO=4&transport=websocket"
-    /*  debugPrint(dotenv.env['SOCKET_URL']); */
+    debugPrint(socketUrl);
     await AppInit.initialize();
   } catch (e) {
     debugPrint('$e => socket');
