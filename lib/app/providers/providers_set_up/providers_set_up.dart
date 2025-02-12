@@ -9,6 +9,7 @@ import '../../data/repository/assets/websocket_service_impl.dart'
 import '../../data/repository/assets/websokcet_repository.dart';
 import '../../data/repository/auth/auth_repository_impl.dart';
 import '../../data/repository/auth/auth_service_impl.dart';
+import '../../data/services/new_auth_service.dart';
 import '../../providers/auth_view_model/auth_view_model.dart';
 import '../home_content_view_model/home_content_view_model.dart';
 
@@ -16,9 +17,11 @@ class ProvidersSetUp {
   static List<SingleChildWidget> providers = [
     ChangeNotifierProvider(
       create: (context) => AuthViewModel(
-        AuthRepositoryImpl(
+        AuthRepositoryImpl(NewAuthService()),
+        // yeni service kullanılıyor
+        /*  AuthRepositoryImpl(
           FirebaseAuthService(FirebaseAuth.instance),
-        ),
+        ), */
       ),
     ),
     ChangeNotifierProvider(

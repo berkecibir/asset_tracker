@@ -85,4 +85,9 @@ class AppTexts {
   static const editProfile = 'Profili Düzenle';
   static const report = 'Hata Bildir';
   static const userName = 'Berke Atahan';
+
+  // new auth service strings
+  static const mockMail = 'mock@mail.com';
+  static const mockPassword = '123456';
+  static const mockServiceException = 'Geçersiz e-posta veya şifre!';
 }
