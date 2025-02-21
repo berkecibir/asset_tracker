@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'websocket_service.dart';
@@ -22,22 +21,22 @@ class WebSocketService implements IWebSocketService {
     try {
       final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
       if (socketUrl.isEmpty) {
-        debugPrint('Bağlanılmaya çalışılan URL: $url');
+        //debugPrint('Bağlanılmaya çalışılan URL: $url');
       }
       _channel = WebSocketChannel.connect(Uri.parse(url));
       _channel.stream.listen(
         (data) {
-          debugPrint("WebSocket'ten gelen veri: $data");
+          // debugPrint("WebSocket'ten gelen veri: $data");
           _controller?.add(data);
         },
         onDone: () => _controller?.close(),
         onError: (error) {
           _controller?.addError(error);
-          debugPrint("WebSocket bağlantısı hatası: $error");
+          //  debugPrint("WebSocket bağlantısı hatası: $error");
         },
       );
     } catch (e) {
-      debugPrint('WebSocket bağlantısı başlatılamadı: $e');
+      // debugPrint('WebSocket bağlantısı başlatılamadı: $e');
     }
   }
 

@@ -4,9 +4,9 @@ import 'package:asset_tracker/app/core/widgets/device_spacing/device_spacing.dar
 import 'package:asset_tracker/app/presentation/home_content/mixin/home_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/utils/constants/app_text_style.dart';
 import '../../../providers/home_content_view_model/home_content_view_model.dart';
 import '../../widgets/appbar/custom_app_bar.dart';
+import '../../widgets/home_content/add_asset_dialog.dart';
 import '../../widgets/home_content/build_assets_list.dart';
 import '../../widgets/home_content/search_field.dart';
 
@@ -26,6 +26,15 @@ class _HomePageContentState extends State<HomePageContent> with HomeHelper {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const AddAssetDialog(),
+              );
+            },
+            child: const Text(AppTexts.addAssetButton),
+          ),
           appBar: const CustomAppBar(),
           body: Column(children: [
             DeviceSpacing.large.height,
@@ -38,10 +47,10 @@ class _HomePageContentState extends State<HomePageContent> with HomeHelper {
             DeviceSpacing.large.height,
             Expanded(
                 child: viewModel.assets.isEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
                           AppTexts.noDataMessage,
-                          style: kHomePageContentCenterMessage,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       )
                     : Padding(

@@ -1,3 +1,4 @@
+import 'package:asset_tracker/app/presentation/assets/assets_page.dart';
 import 'package:asset_tracker/app/presentation/home/page/home_page.dart';
 import 'package:asset_tracker/app/presentation/home_content/page/home_page_content.dart';
 import 'package:asset_tracker/app/presentation/login/page/login_page.dart';
@@ -12,5 +13,6 @@ class AppRoutes {
     HomePageContent.id: (context) => const HomePageContent(),
     ProfilePage.id: (context) => const ProfilePage(),
     HomePage.id: (context) => const HomePage(),
+    AssetsPage.id: (context) => const AssetsPage(),
   };
 }
