@@ -21,19 +21,15 @@ class WebSocketService implements IWebSocketService {
   void connect(String url) {
     try {
       final socketUrl = dotenv.env[AppTexts.socketUrl] ?? '';
-      if (socketUrl.isEmpty) {
-        debugPrint('Bağlanılmaya çalışılan URL: $url');
-      }
+      if (socketUrl.isEmpty) {}
       _channel = WebSocketChannel.connect(Uri.parse(url));
       _channel.stream.listen(
         (data) {
-          debugPrint("WebSocket'ten gelen veri: $data");
           _controller?.add(data);
         },
         onDone: () => _controller?.close(),
         onError: (error) {
           _controller?.addError(error);
-          debugPrint("WebSocket bağlantısı hatası: $error");
         },
       );
     } catch (e) {

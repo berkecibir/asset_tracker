@@ -1,4 +1,5 @@
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
+import 'package:asset_tracker/app/presentation/assets/assets_page.dart';
 import 'package:asset_tracker/app/presentation/home_content/page/home_page_content.dart';
 import 'package:asset_tracker/app/presentation/profile/page/profile_page.dart';
 import 'package:asset_tracker/app/providers/home_page_view_model/home_page_view_model.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
           physics: const NeverScrollableScrollPhysics(),
           children: const [
             HomePageContent(),
+            AssetsPage(),
             ProfilePage(),
           ],
         ),
@@ -37,6 +39,10 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: AppTexts.homePageBottomNavBar,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.currency_exchange),
+              label: AppTexts.myAssets,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

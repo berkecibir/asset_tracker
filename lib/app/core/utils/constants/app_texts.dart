@@ -22,6 +22,7 @@ class AppTexts {
   static const homePageContentId = 'Home';
   static const profilePageId = 'Profile';
   static const homePageId = 'HomePage';
+  static const assetPageId = 'Asset';
 
   // hint text strings
 
@@ -50,6 +51,7 @@ class AppTexts {
   static const searchingAssets = 'Varlıkları ara...';
   static const homePageBottomNavBar = 'Ana Sayfa';
   static const profileBottomNavBar = 'Profil';
+  static const myAssets = 'Varlıklarım';
   // socket url strings
   static const socketUrl = 'SOCKET_URL';
 
@@ -90,4 +92,50 @@ class AppTexts {
   static const mockMail = 'mock@mail.com';
   static const mockPassword = '123456';
   static const mockServiceException = 'Geçersiz e-posta veya şifre!';
+
+  // asset validator strings
+  static const enterPriceInfo = 'Fiyat Bilgisi Girmelisiniz';
+  static const enterAssetTypeInfo = 'Varlık Tipi Seçmelisiniz';
+  static const enterPurchaseDate = 'Tarih Seçmelisiniz';
+  static const enterQuantity = 'Adet Bilgisi Girmelisiniz';
+
+  // alert dialog strings
+  static const addAsset = "Varlık Ekle";
+  static const hintForDropDown = "Varlık Tipi Seçin";
+  static const unKnownType = 'Bilinmeyen';
+  static const labelTextForAddAsset = "Alış Fiyatı";
+  static const choosePurchaseDate = "Alım Tarihi Seçin";
+  static const cancel = "İptal";
+  static const addAssetButton = "Ekle";
+  static const quantity = 'Adet';
+  static const choosenAsset = 'Seçilen:';
+
+  // user asset page strings
+  static const price = 'Fiyat';
+  static const purchaseDate = 'Alış Tarihi:';
+  static const noPriceInfo = 'Fiyat Bilgisi Yok';
+  static const noDateInfo = 'Tarih Bilgisi Yok';
+
+  // user asset dialog strings
+
+  static const deleteConfirmation = 'Silme Onayı';
+  static const deleteUserAssetContent =
+      'Bu varlığı silmek istediğinize emin misiniz ?';
+  static const no = 'Hayır';
+  static const yes = 'Evet';
+  static const initialAssetsMessage = 'Henüz varlık eklenmedi';
+
+  // add asset view model strings
+  static const quantityAddAsset = 'quantity';
+  static const purchasePrice = 'purchasePrice';
+  static const assetType = 'assetType';
+  static const purchaseDateAddAsset = 'purchaseDate';
+  static const assets = 'assets';
+  static const assetAdded = 'Varlık eklendi';
+
+  // user asset repo string
+  static const assetTypeUserAsset = 'AssetType.';
+
+  // user asset model strings
+  static const userAssetModelUnknown = 'unknown';
 }
