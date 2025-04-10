@@ -1,10 +1,10 @@
 import 'package:asset_tracker/app/core/enum/asset_type_enum.dart';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:asset_tracker/app/data/models/assets/user_asset.dart';
 import 'package:flutter/material.dart';
 
 class AssetTile extends StatelessWidget {
-  final QueryDocumentSnapshot asset;
+  final UserAsset asset;
   final VoidCallback onDelete;
 
   const AssetTile({
@@ -15,23 +15,21 @@ class AssetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final assetType = AssetType.values
-        .firstWhere((e) => e.toString() == asset[AppTexts.assetType].toString())
-        .code;
-    final quantity = asset[AppTexts.quantityAddAsset] ?? 0;
-    final purchasePrice = asset[AppTexts.purchasePrice] ?? AppTexts.noPriceInfo;
-    final purchaseDate =
-        asset[AppTexts.purchaseDateAddAsset] ?? AppTexts.noDateInfo;
-
     return Card(
       child: ListTile(
-        title: Text(assetType),
+        title: Text(
+          asset.assetType.displayName,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('${AppTexts.quantity}: $quantity'),
-            Text('${AppTexts.price}: $purchasePrice'),
-            Text('${AppTexts.purchaseDate} $purchaseDate'),
+            Text('${AppTexts.quantity}: ${asset.quantity}'),
+            Text('${AppTexts.price}: ${asset.purchasePrice}'),
+            Text('${AppTexts.purchaseDate}: ${asset.purchaseDate}'),
           ],
         ),
         leading: const Icon(Icons.shopping_bag),

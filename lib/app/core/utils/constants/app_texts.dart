@@ -135,4 +135,7 @@ class AppTexts {
 
   // user asset repo string
   static const assetTypeUserAsset = 'AssetType.';
+
+  // user asset model strings
+  static const userAssetModelUnknown = 'unknown';
 }

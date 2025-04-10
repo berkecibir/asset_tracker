@@ -9,6 +9,8 @@ class UserAssetViewModel extends ChangeNotifier {
   List<UserAsset> _assets = [];
   List<UserAsset> get assets => _assets;
 
+  Stream<List<UserAsset>> get assetsStream => _repository.getAssetsStream();
+
   UserAssetViewModel(this._repository) {
     _listenToAssets();
   }

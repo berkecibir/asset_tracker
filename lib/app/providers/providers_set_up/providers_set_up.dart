@@ -1,4 +1,4 @@
-import 'package:asset_tracker/app/data/repository/user_asset/user_asset_repository.dart';
+import 'package:asset_tracker/app/data/repository/user_asset/firebase_user_asset_repository/firebase_user_asset_repository.dart';
 import 'package:asset_tracker/app/providers/add_asset_view_model/add_asset_view_model.dart';
 import 'package:asset_tracker/app/providers/home_page_view_model/home_page_view_model.dart';
 import 'package:asset_tracker/app/providers/profile_view_model/profile_view_model.dart';
@@ -12,6 +12,7 @@ import '../../data/repository/assets/websocket_service_impl.dart'
 import '../../data/repository/assets/websokcet_repository.dart';
 import '../../data/repository/auth/auth_repository_impl.dart';
 import '../../data/repository/auth/auth_service_impl.dart';
+
 import '../../providers/auth_view_model/auth_view_model.dart';
 import '../home_content_view_model/home_content_view_model.dart';
 
@@ -35,6 +36,6 @@ class ProvidersSetUp {
     ChangeNotifierProvider(create: (_) => AddAssetViewModel()),
     ChangeNotifierProvider(
         create: (_) => UserAssetViewModel(
-            UserAssetRepositoryImpl(FirebaseFirestore.instance))),
+            FirebaseUserAssetRepository(FirebaseFirestore.instance))),
   ];
 }
