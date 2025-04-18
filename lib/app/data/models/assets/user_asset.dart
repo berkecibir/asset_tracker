@@ -21,10 +21,16 @@ class UserAsset {
   factory UserAsset.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     debugPrint("Firestore assetType: ${data[AppTexts.assetType]}");
+
+    String rawAssetType = data[AppTexts.assetType] ?? '';
+    String code = rawAssetType.contains('AssetType.')
+        ? rawAssetType.split('AssetType.')[1].toUpperCase()
+        : rawAssetType;
+
     return UserAsset(
       id: doc.id,
       assetType: AssetType.values.firstWhere(
-        (e) => e.code == data[AppTexts.assetType],
+        (e) => e.code == code,
         orElse: () => AssetType.unknown,
       ),
       quantity: data[AppTexts.quantityAddAsset] ?? 0,
@@ -32,44 +38,4 @@ class UserAsset {
       purchaseDate: data[AppTexts.purchaseDateAddAsset],
     );
   }
-
-  Map<String, dynamic> toFirestore() {
-    return {
-      AppTexts.assetType: assetType.code,
-      AppTexts.quantityAddAsset: quantity,
-      AppTexts.purchasePrice: purchasePrice,
-      AppTexts.purchaseDateAddAsset: purchaseDate,
-    };
-  }
 }
-
-
-/* class UserAsset {
-  final String id;
-  final String assetType;
-  final int quantity;
-  final String? purchasePrice;
-  final String? purchaseDate;
-
-  UserAsset({
-    required this.id,
-    required this.assetType,
-    required this.quantity,
-    this.purchasePrice,
-    this.purchaseDate,
-  });
-
-  factory UserAsset.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
-    debugPrint("Firestore assetType: ${data[AppTexts.assetType]}");
-
-    return UserAsset(
-      id: doc.id,
-      assetType: data[AppTexts.assetType] ?? AppTexts.userAssetModelUnknown,
-      quantity: data[AppTexts.quantityAddAsset] ?? 0,
-      purchasePrice: data[AppTexts.purchasePrice].toString(),
-      purchaseDate: data[AppTexts.purchaseDateAddAsset],
-    );
-  }
-}
- */
