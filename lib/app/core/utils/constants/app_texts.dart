@@ -103,7 +103,7 @@ class AppTexts {
   static const addAsset = "Varlık Ekle";
   static const hintForDropDown = "Varlık Tipi Seçin";
   static const unKnownType = 'Bilinmeyen';
-  static const labelTextForAddAsset = "Alış Fiyatı";
+  static const labelTextForAddAsset = "Alım Fiyatı";
   static const choosePurchaseDate = "Alım Tarihi Seçin";
   static const cancel = "İptal";
   static const addAssetButton = "Ekle";
@@ -132,10 +132,24 @@ class AppTexts {
   static const purchaseDateAddAsset = 'purchaseDate';
   static const assets = 'assets';
   static const assetAdded = 'Varlık eklendi';
+  static const currentPrice = 'currentPrice';
 
   // user asset repo string
-  static const assetTypeUserAsset = 'AssetType.';
+  static const assetTypeUserAssetRepo = 'AssetType.';
 
   // user asset model strings
   static const userAssetModelUnknown = 'unknown';
+  static const firestoreAssetType = 'Firestore assetType:';
+  static const assetTypeUserAsset = 'AssetType.';
+
+  // user asset view model strings
+  static const deleteAssetUserAsset = 'Varlık silindi:';
+
+  // transaction history strings
+  static const transactionHistoryAppBar = 'Geçmiş Alım İşlemleri';
+  static const transactionBodyMessage = "Hiç işlem yapılmamış.";
+  static const date = 'Tarih';
+
+  // total asset card strings
+  static const totalAsset = 'Toplam Varlık Değeriniz';
 }

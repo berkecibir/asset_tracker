@@ -1,5 +1,6 @@
 import 'package:asset_tracker/app/core/enum/asset_type_enum.dart';
 import 'package:asset_tracker/app/core/utils/constants/app_texts.dart';
+import 'package:asset_tracker/app/core/widgets/device_padding/device_padding.dart';
 import 'package:asset_tracker/app/data/models/assets/user_asset.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AssetTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: DevicePadding.large.all,
       child: ListTile(
         title: Text(
           asset.assetType.displayName,
