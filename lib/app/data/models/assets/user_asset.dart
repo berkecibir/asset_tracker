@@ -20,11 +20,11 @@ class UserAsset {
 
   factory UserAsset.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    debugPrint("Firestore assetType: ${data[AppTexts.assetType]}");
+    debugPrint("${AppTexts.firestoreAssetType} ${data[AppTexts.assetType]}");
 
     String rawAssetType = data[AppTexts.assetType] ?? '';
-    String code = rawAssetType.contains('AssetType.')
-        ? rawAssetType.split('AssetType.')[1].toUpperCase()
+    String code = rawAssetType.contains(AppTexts.assetTypeUserAsset)
+        ? rawAssetType.split(AppTexts.assetTypeUserAsset)[1].toUpperCase()
         : rawAssetType;
 
     return UserAsset(
@@ -35,7 +35,10 @@ class UserAsset {
       ),
       quantity: data[AppTexts.quantityAddAsset] ?? 0,
       purchasePrice: data[AppTexts.purchasePrice]?.toString(),
-      purchaseDate: data[AppTexts.purchaseDateAddAsset],
+      purchaseDate: data[AppTexts.purchaseDateAddAsset]
+          .toString()
+          .substring(0, 10)
+          .replaceAll('-', '/'),
     );
   }
 }

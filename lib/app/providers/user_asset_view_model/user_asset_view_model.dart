@@ -57,7 +57,17 @@ class UserAssetViewModel extends ChangeNotifier {
   Future<void> deleteAsset(BuildContext context, String docId) async {
     await showDeleteConfirmationDialog(context, docId, (id) async {
       await _repository.deleteAsset(id);
-      debugPrint("Varlık silindi: $id");
+      debugPrint("${AppTexts.deleteAssetUserAsset} $id");
     });
+  }
+
+  double getTotalValue() {
+    double totalValue = 0.0;
+    for (var asset in _assets) {
+      if (asset.purchasePrice != null) {
+        totalValue += double.parse(asset.purchasePrice!) * asset.quantity;
+      }
+    }
+    return totalValue;
   }
 }
